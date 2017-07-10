@@ -1,0 +1,156 @@
+// SCSS variables are information about icon's compiled state, stored under its original file name
+//
+// .icon-home {
+//   width: $icon-home-width;
+// }
+//
+// The large array-like variables contain all information about a single icon
+// $icon-home: x y offset_x offset_y width height total_width total_height image_path;
+//
+// At the bottom of this section, we provide information about the spritesheet itself
+// $spritesheet: width height image $spritesheet-sprites;
+$beer-name: 'beer';
+$beer-x: 206px;
+$beer-y: 0px;
+$beer-offset-x: -206px;
+$beer-offset-y: 0px;
+$beer-width: 71px;
+$beer-height: 65px;
+$beer-total-width: 277px;
+$beer-total-height: 224px;
+$beer-image: '../images/sprite.png';
+$beer: (206px, 0px, -206px, 0px, 71px, 65px, 277px, 224px, '../images/sprite.png', 'beer', );
+$gallery-name: 'gallery';
+$gallery-x: 0px;
+$gallery-y: 164px;
+$gallery-offset-x: 0px;
+$gallery-offset-y: -164px;
+$gallery-width: 75px;
+$gallery-height: 60px;
+$gallery-total-width: 277px;
+$gallery-total-height: 224px;
+$gallery-image: '../images/sprite.png';
+$gallery: (0px, 164px, 0px, -164px, 75px, 60px, 277px, 224px, '../images/sprite.png', 'gallery', );
+$life-name: 'life';
+$life-x: 62px;
+$life-y: 0px;
+$life-offset-x: -62px;
+$life-offset-y: 0px;
+$life-width: 72px;
+$life-height: 72px;
+$life-total-width: 277px;
+$life-total-height: 224px;
+$life-image: '../images/sprite.png';
+$life: (62px, 0px, -62px, 0px, 72px, 72px, 277px, 224px, '../images/sprite.png', 'life', );
+$mouse-name: 'mouse';
+$mouse-x: 0px;
+$mouse-y: 0px;
+$mouse-offset-x: 0px;
+$mouse-offset-y: 0px;
+$mouse-width: 62px;
+$mouse-height: 92px;
+$mouse-total-width: 277px;
+$mouse-total-height: 224px;
+$mouse-image: '../images/sprite.png';
+$mouse: (0px, 0px, 0px, 0px, 62px, 92px, 277px, 224px, '../images/sprite.png', 'mouse', );
+$pivovar-name: 'pivovar';
+$pivovar-x: 134px;
+$pivovar-y: 0px;
+$pivovar-offset-x: -134px;
+$pivovar-offset-y: 0px;
+$pivovar-width: 72px;
+$pivovar-height: 72px;
+$pivovar-total-width: 277px;
+$pivovar-total-height: 224px;
+$pivovar-image: '../images/sprite.png';
+$pivovar: (134px, 0px, -134px, 0px, 72px, 72px, 277px, 224px, '../images/sprite.png', 'pivovar', );
+$profi-name: 'profi';
+$profi-x: 0px;
+$profi-y: 92px;
+$profi-offset-x: 0px;
+$profi-offset-y: -92px;
+$profi-width: 72px;
+$profi-height: 72px;
+$profi-total-width: 277px;
+$profi-total-height: 224px;
+$profi-image: '../images/sprite.png';
+$profi: (0px, 92px, 0px, -92px, 72px, 72px, 277px, 224px, '../images/sprite.png', 'profi', );
+$with2008-name: 'with2008';
+$with2008-x: 72px;
+$with2008-y: 92px;
+$with2008-offset-x: -72px;
+$with2008-offset-y: -92px;
+$with2008-width: 72px;
+$with2008-height: 72px;
+$with2008-total-width: 277px;
+$with2008-total-height: 224px;
+$with2008-image: '../images/sprite.png';
+$with2008: (72px, 92px, -72px, -92px, 72px, 72px, 277px, 224px, '../images/sprite.png', 'with2008', );
+$spritesheet-width: 277px;
+$spritesheet-height: 224px;
+$spritesheet-image: '../images/sprite.png';
+$spritesheet-sprites: ($beer, $gallery, $life, $mouse, $pivovar, $profi, $with2008, );
+$spritesheet: (277px, 224px, '../images/sprite.png', $spritesheet-sprites, );
+
+// The provided mixins are intended to be used with the array-like variables
+//
+// .icon-home {
+//   @include sprite-width($icon-home);
+// }
+//
+// .icon-email {
+//   @include sprite($icon-email);
+// }
+//
+// Example usage in HTML:
+//
+// `display: block` sprite:
+// <div class="icon-home"></div>
+//
+// To change `display` (e.g. `display: inline-block;`), we suggest using a common CSS class:
+//
+// // CSS
+// .icon {
+//   display: inline-block;
+// }
+//
+// // HTML
+// <i class="icon icon-home"></i>
+@mixin sprite-width($sprite) {
+  width: nth($sprite, 5);
+}
+
+@mixin sprite-height($sprite) {
+  height: nth($sprite, 6);
+}
+
+@mixin sprite-position($sprite) {
+  $sprite-offset-x: nth($sprite, 3);
+  $sprite-offset-y: nth($sprite, 4);
+  background-position: $sprite-offset-x  $sprite-offset-y;
+}
+
+@mixin sprite-image($sprite) {
+  $sprite-image: nth($sprite, 9);
+  background-image: url(#{$sprite-image});
+}
+
+@mixin sprite($sprite) {
+  @include sprite-image($sprite);
+  @include sprite-position($sprite);
+  @include sprite-width($sprite);
+  @include sprite-height($sprite);
+}
+
+// The `sprites` mixin generates identical output to the CSS template
+//   but can be overridden inside of SCSS
+//
+// @include sprites($spritesheet-sprites);
+@mixin sprites($sprites) {
+  @each $sprite in $sprites {
+    $sprite-name: nth($sprite, 10);
+    .#{$sprite-name} {
+      @include sprite($sprite);
+    }
+  }
+}

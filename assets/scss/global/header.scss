@@ -1,0 +1,9 @@
+.section-header{
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+.bg-inverse{
+  .section-header{
+    color: $white;
+  }
+}

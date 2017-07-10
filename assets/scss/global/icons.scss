@@ -1,0 +1,18 @@
+.icon_with{
+  @include sprite($with2008);
+}
+.icon_profi{
+  @include sprite($profi);
+}
+.icon_pivovar{
+  @include sprite($pivovar);
+}
+.icon_life{
+  @include sprite($life);
+}
+.icon_beer{
+  @include sprite($beer);
+}
+.icon_gallery{
+  @include sprite($gallery);
+}
